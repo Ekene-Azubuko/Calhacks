@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-gap: 10px;
+        width: 200px;
+        height: 200px;
+        perspective: 1000px;
+      }
+      .card {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        transform-style: preserve-3d;
+      }
+      .card div {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background-size: cover;
+        backface-visibility: hidden;
+      }
+      .front {
+        background: url("./images/therapist_1.jpg");
+      }
+      .back {
+        background: blue;
+        transform: rotateY(180deg);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="grid">
+      <div class="card">
+        <div class="front"></div>
+        <div class="back"></div>
+      </div>
+      <div class="card">
+        <div class="front"></div>
+        <div class="back"></div>
+      </div>
+      <div class="card">
+        <div class="front"></div>
+        <div class="back"></div>
+      </div>
+      <div class="card">
+        <div class="front"></div>
+        <div class="back"></div>
+      </div>
+      <!-- Repeat for the other three cards -->
+    </div>
+
+    <button id="flipButton">Flip</button>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+    <script>
+      var cards = document.querySelectorAll(".card");
+      var flipButton = document.querySelector("#flipButton");
+
+      flipButton.addEventListener("click", function () {
+        gsap.to(cards, {
+          rotationY: "+=180",
+          stagger: 0.1,
+          ease: "power2.inOut",
+        });
+      });
+    </script>
+  </body>
+</html>

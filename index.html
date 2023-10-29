@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Music Therapy</title>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="flex-container-1">
+        <div class="navigation">
+          <nav>
+            <ul>
+              <li>
+                <a href="index.html" class="logo"
+                  ><img src="./Frame 1 (1).svg" alt="" class="logo">
+              </li>
+              <li><a href="index.html">Home</a></li>
+              <li><a href="services.html">Services</a></li>
+              <li><a href="#">Client Story</a></li>
+            </ul>
+          </nav>
+        </div>
+        <div class="hero-section">
+          <div class="title">
+            <h1>Connecting People with precise musical therapy Through ai</h1>
+          </div>
+          <p class="subtitle">
+            Harmonizing Health: Experience Personalized Healing and Wellness
+            with Our AI-Driven Music Therapy - Tune into Your Well-being
+          </p>
+          <div class="cta">
+            <button class="cta-explore">Explore Now</button>
+          </div>
+        </div>
+        <div class="feature-section">
+          <div class="cards">
+            <div class="card">
+              <div class="circle">
+                <span class="material-symbols-outlined"> voice_chat </span>
+              </div>
+              <h3 class="feature-title">Stay in touch with your therapist</h3>
+              <p class="feature-subtitle">
+                Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+                Reiciendis quibusdam explicabo provident repellendus corporis
+                recusandae at nostrum itaque sit ex.
+              </p>
+            </div>
+            <div class="card">
+              <div class="circle">
+                <span class="material-symbols-outlined"> account_circle </span>
+              </div>
+
+              <h3 class="feature-title">Stay in touch with your therapist</h3>
+              <p class="feature-subtitle">
+                Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+                Reiciendis quibusdam explicabo provident repellendus corporis
+                recusandae at nostrum itaque sit ex.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="flex-container-2">
+        <div class="card-items">
+            <img src="./images/therapist_1.jpg" alt="#" class="hero-img" />
+            <div class="back"></div>
+        </div>
+        <div class="card-items">
+            <img src="./images/therapist_2.jpg" alt="#" class="hero-img" />
+            <div class="back"></div>
+        </div>
+        <div class="card-items">
+            <img src="./images/therapist_3.jpg" alt="#" class="hero-img" />
+            <div class="back"></div>
+        </div>
+        <div class="card-items">
+            <img src="./images/therapist_4.jpg" alt="#" class="hero-img" />
+            <div class="back"></div>
+        </div>
+        
+      </div>
+    </div>
+  </body>
+  <script>
+    let flipButton = document.querySelector(".cta-explore");
+    let cards = document.querySelectorAll(".flex-container-2 .card-items")
+    let hero = document.querySelector('.hero-section')
+    // Create a new SpeechRecognition object and set the language model to English.
+    const speechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    const recognition = new speechRecognition();
+    recognition.lang = 'en-US';
+
+    // Use a more robust speech recognition engine, such as Google Cloud Speech-to-Text.
+    recognition.interimResults = true;
+    recognition.maxAlternativesPerResult = 3;
+
+    // Use a noise cancellation algorithm.
+    recognition.noiseSuppression = true;
+
+    // Implement a timeout mechanism of 10 seconds.
+    const timeout = 10000;
+    let timer;
+
+
+flipButton.addEventListener("click", function () {
+
+ let tl =  gsap.timeline()
+  tl.to(cards, {
+    rotationY: "+=180",
+    stagger: 0.1,
+    ease: "power2.inOut",
+  });
+
+  tl.to(".back", {
+    borderRadius: "0",
+    ease: "power2.inOut"
+  }) 
+
+  tl.to(".flex-container-2", {
+    gap:0,
+    ease: "power2.inOut"
+  });
+
+  // Do the recognition
+  recognition.start();
+  hero.innerHTML = "<img src='./images/wave-effect-unscreen.gif'>"
+      timer = setTimeout(() => {
+        recognition.stop();
+      }, timeout);
+});
+
+recognition.addEventListener("result", (event) => {
+      console.log(event)
+    });
+
+    recognition.addEventListener("end", () => {
+      clearTimeout(timer);
+    });
+
+
+  </script>
+</html>
